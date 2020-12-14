@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql');
 const multer = require('multer');
-if (process?.env?.JAWSDB_URL) {
+if (process.env.JAWSDB_URL) {
     console.log("works:", process.env.JAWSDB_URL);
 } else {
     console.log("doesn't work");
