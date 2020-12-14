@@ -2,6 +2,12 @@ const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql');
 const multer = require('multer');
+if (process?.env?.JAWSDB_URL) {
+    console.log("works:", process.env.JAWSDB_URL);
+} else {
+    console.log("doesn't work");
+}
+// var connection = mysql.createConnection('mysql://user:pass@host/db?debug=true&charset=BIG5_CHINESE_CI&timezone=-0700');
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
