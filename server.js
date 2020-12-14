@@ -4,16 +4,17 @@ const mysql = require('mysql');
 const multer = require('multer');
 if (process.env.JAWSDB_URL) {
     console.log("works:", process.env.JAWSDB_URL);
+    var connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
     console.log("doesn't work");
+    var connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'project4'
+    });
 }
-// var connection = mysql.createConnection('mysql://user:pass@host/db?debug=true&charset=BIG5_CHINESE_CI&timezone=-0700');
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'project4'
-});
+
 const app = express();
 app.use(express.json());
 app.use(express.static('uploads'));
