@@ -7,7 +7,7 @@ if (process.env.JAWSDB_URL) {
     var connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
     console.log("doesn't work");
-    var connection = mysql.createConnection({
+    connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',
         password: '',
@@ -401,7 +401,11 @@ app.delete('/admin/:id', (req, res) => {
         administration(req, res);
     })
 })
-var port = process.env?.PORT || '3001';
+if (process.env.JAWSDB_URL) {
+    var port = process.env.PORT;
+} else {
+    port = '3001';
+}
 app.listen(port, () => {
     console.log('works');
 })
