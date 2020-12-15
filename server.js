@@ -401,11 +401,7 @@ app.delete('/admin/:id', (req, res) => {
         administration(req, res);
     })
 })
-if (process.env.JAWSDB_URL) {
-    var port = process.env.PORT;
-} else {
-    port = '3001';
-}
+var port = process.env.JAWSDB_URL ? process.env.PORT : '3001';
 app.listen(port, () => {
     console.log('works');
 })
