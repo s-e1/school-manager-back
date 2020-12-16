@@ -4,6 +4,8 @@ const mysql = require('mysql');
 const multer = require('multer');
 if (process.env.JAWSDB_URL) {
     console.log("works:", process.env.JAWSDB_URL);
+    var url = 'https://school--management.herokuapp.com';
+    var port = process.env.PORT;
     var connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
     console.log("doesn't work");
@@ -13,6 +15,8 @@ if (process.env.JAWSDB_URL) {
         password: '',
         database: 'project4'
     });
+    url = 'http://localhost:3001';
+    port = '3001';
 }
 
 const app = express();
@@ -198,7 +202,7 @@ app.post('/course', upload.single('imageFile'), (req, res) => {
     req.body = JSON.parse(req.body.text);
     //checks for image file
     if (req.file) {
-        var path = 'http://localhost:3001/' + req.file.filename;
+        var path = url + req.file.filename;
         req.body.image = path;
     }
     //adds data to db
@@ -232,7 +236,7 @@ app.put('/course', upload.single('imageFile'), (req, res) => {
     req.body = JSON.parse(req.body.text);
     let { id, name, description, image } = req.body;
     if (req.file) {
-        var path = 'http://localhost:3001/' + req.file.filename;
+        var path = url + req.file.filename;
         image = path;
     }
 
@@ -266,7 +270,7 @@ app.post('/student', upload.single('imageFile'), (req, res) => {
     req.body = JSON.parse(req.body.text);
     let { name, phone, email, image, courses } = req.body;
     if (req.file) {
-        var path = 'http://localhost:3001/' + req.file.filename;
+        var path = url + req.file.filename;
         image = path;
     }
 
@@ -298,7 +302,7 @@ app.put('/student', upload.single('imageFile'), (req, res) => {
     req.body = JSON.parse(req.body.text);
     let { id, name, phone, email, image, courses } = req.body;
     if (req.file) {
-        var path = 'http://localhost:3001/' + req.file.filename;
+        var path = url + req.file.filename;
         image = path;
     }
 
@@ -349,7 +353,7 @@ app.post('/admin', upload.single('imageFile'), (req, res) => {
     //req.body - name, phone, email, role, password, image
     req.body = JSON.parse(req.body.text);
     if (req.file) {
-        var path = 'http://localhost:3001/' + req.file.filename;
+        var path = url + req.file.filename;
         req.body.image = path;
     }
 
@@ -378,7 +382,7 @@ app.put('/admin', upload.single('imageFile'), (req, res) => {
     req.body = JSON.parse(req.body.text);
     let { id, name, phone, email, role, password, image } = req.body;
     if (req.file) {
-        var path = 'http://localhost:3001/' + req.file.filename;
+        var path = url + req.file.filename;
         image = path;
     }
 
@@ -401,7 +405,6 @@ app.delete('/admin/:id', (req, res) => {
         administration(req, res);
     })
 })
-var port = process.env.JAWSDB_URL ? process.env.PORT : '3001';
 app.listen(port, () => {
     console.log('works');
 })
