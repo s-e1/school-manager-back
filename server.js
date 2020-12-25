@@ -80,6 +80,7 @@ endpoints:
 
 // data needed for school page
 const school = (req, res) => {
+    console.log('server contacted');
     //get all courses
     let sql = `SELECT * FROM course`;
     connection.query(sql, (err, result) => {
